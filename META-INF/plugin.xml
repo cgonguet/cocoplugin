@@ -1,0 +1,113 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin url="https://acos.alcatel-lucent.com/projects/cocoplugin">
+  <name>CoCoPlugin</name>
+  <description>Code Collaborator plugin</description>
+  <vendor email="cocoplugin-support@acos.alcatel-lucent.com"
+          url="https://acos.alcatel-lucent.com/projects/cocoplugin">ALU - CoCoPlugin project on ACOS
+  </vendor>
+  <version>6.0</version>
+  <change-notes>
+    <![CDATA[
+Version 6.0
+<ul>
+<li>Complient with Code Collaborator version 6.0.6016</li>
+</ul>
+Version 5.0
+<ul>
+<li>Complient with Code Collaborator version 5.0.5026</li>
+</ul>
+Version 2.6
+<ul>
+<li>New action: Add file(s) to code review</li>
+</ul>
+Version 2.5
+<ul>
+<li>Update the project defined fields from new values available on the server (example: LTE project and versions)</li>
+<li>Add a team list editor in setup (user can add or remove a team)</li>
+</ul>
+Version 2.4
+<ul>
+<li>Add a button in the commit project dialog to create a code review with the selected materials</li>
+<li>The upload changes action shows a dialog to choose the change list</li>
+</ul>
+Version 2.3
+<ul>
+<li>Provide a team members list</li>
+<li>Default defect creator is the reviewer</li>
+</ul>
+Version 2.2
+<ul>
+<li>New team: FMS CP</li>
+<li>New console look</li>
+</ul>
+Version 2.1
+<ul>
+<li>New action: Upload list of files</li>
+</ul>
+Version 2.0
+<ul>
+<li>Console manager with changes/defects</li>
+<li>User defined fields in properties file</li>
+</ul>
+Version 1.0
+<ul>
+<li>Basic actions: Create review, Upload changeset files, Create defect</li>
+<li>Basic configuration</li>
+</ul>
+]]>
+  </change-notes>
+  <idea-version since-build="3000"/>
+
+  <project-components>
+    <component>
+      <implementation-class>com.alu.oam.tools.idea.plugin.coco.CoCoCommitExecutorComponent</implementation-class>
+    </component>
+  </project-components>
+
+  <application-components>
+    <component>
+      <implementation-class>com.alu.oam.tools.idea.plugin.coco.CoCoComponent</implementation-class>
+      <option name="workspace" value="true"/>
+    </component>
+  </application-components>
+  <actions>
+    <group id="CoCoGroup" text="Code Collaborator" description="Code Collaborator plugin" popup="true">
+      <action id="CreateNewAndUpload" class="com.alu.oam.tools.idea.plugin.coco.actions.ReviewCreateAction"
+              text="Create review and upload changes"
+              description="Create a new review and upload changes (based on VCS changeset)">
+      </action>
+      <action id="ChooseReview" class="com.alu.oam.tools.idea.plugin.coco.actions.ReviewOpenAction"
+              text="Open review"
+              description="Open an existing review"/>
+      <add-to-group group-id="ToolsMenu" anchor="last"/>
+    </group>
+    <group id="CodeReviewActions" class="com.alu.oam.tools.idea.plugin.coco.actions.OtherActionsGroup"
+           text="Other actions" description="Other actions on review" popup="true">
+      <add-to-group anchor="last" group-id="CoCoGroup"/>
+      <action id="CloseReviewAction" class="com.alu.oam.tools.idea.plugin.coco.actions.ReviewCloseAction"
+              text="Close review"
+              description="Close the review"/>
+      <action id="UploadChanges" class="com.alu.oam.tools.idea.plugin.coco.actions.ReviewUploadChangesAction"
+              text="Upload changes"
+              description="Upload changes (based on VCS changeset)"/>
+      <action id="ReviewAddFile" class="com.alu.oam.tools.idea.plugin.coco.actions.ReviewAddFile"
+              text="Add file(s) to code review"
+              description="Add file to 'Upload files' buffered list">
+        <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+      </action>
+      <action id="UploadFiles" class="com.alu.oam.tools.idea.plugin.coco.actions.ReviewUploadFilesAction"
+              text="Upload files" description="Upload a list of files">
+      </action>
+      <action id="CreateDefect" class="com.alu.oam.tools.idea.plugin.coco.actions.DefectCreateAction"
+              text="Create defect"
+              description="Create a defect">
+        <keyboard-shortcut first-keystroke="ctrl shift d" keymap="$default"/>
+      </action>
+      <action id="TerminateReview" class="com.alu.oam.tools.idea.plugin.coco.actions.ReviewCompleteAction"
+              text="Terminate review" description="Terminate the review"/>
+      <action id="ViewOnServerAction" class="com.alu.oam.tools.idea.plugin.coco.actions.ViewOnServerAction"
+              text="View on server" description="Launch the browser to access the review on server"/>
+    </group>
+  </actions>
+</idea-plugin>
